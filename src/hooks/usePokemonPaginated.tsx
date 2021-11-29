@@ -20,9 +20,8 @@ export const usePokemonPaginated = () => {
         setIsLoading(true);
         const newPokemolist:SimplePokemon[]= pokemonList.map(({name,url})=>{
             const urlParts = url.split('/');
-            const id = urlParts[urlParts.length-20];
+            const id = urlParts[urlParts.length-2];
             const picture = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-
             return {id,picture,name,url}
         });
         setsimplePokemonList([...simplePokemonList,...newPokemolist]);
@@ -34,7 +33,8 @@ export const usePokemonPaginated = () => {
 
     return{
         isLoading,
-        simplePokemonList
+        simplePokemonList,
+        loadPokemos
     }
     
 }
