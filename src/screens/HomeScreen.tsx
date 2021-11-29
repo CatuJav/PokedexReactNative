@@ -6,7 +6,7 @@ import { styles } from '../theme/appTheme';
 export const HomeScreen = () => {
 
     const {top}=useSafeAreaInsets();
-
+    const {isLoading,simplePokemonList}=usePokemonPaginated();
     usePokemonPaginated();
 
     return (

@@ -3,6 +3,8 @@ import { pokemonApi } from '../api/pokemonApi';
 import { PokemonPaginatedResponse, Result, SimplePokemon } from '../interfaces/pokemonInterfaces';
 
 export const usePokemonPaginated = () => {
+
+    const [isLoading, setIsLoading] = useState(true);
     
     const [simplePokemonList, setsimplePokemonList] = useState<SimplePokemon[]>([])
 
@@ -15,13 +17,24 @@ export const usePokemonPaginated = () => {
     }
 
     const mapPokemoList = (pokemonList:Result[])=>{
-        pokemonList.forEach(poke=>{
-            console.log(poke.name);
-        })
+        setIsLoading(true);
+        const newPokemolist:SimplePokemon[]= pokemonList.map(({name,url})=>{
+            const urlParts = url.split('/');
+            const id = urlParts[urlParts.length-20];
+            const picture = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+
+            return {id,picture,name,url}
+        });
+        setsimplePokemonList([...simplePokemonList,...newPokemolist]);
+        setIsLoading(false);
     }
     useEffect(() => {
         loadPokemos();
     }, [])
 
+    return{
+        isLoading,
+        simplePokemonList
+    }
     
 }
