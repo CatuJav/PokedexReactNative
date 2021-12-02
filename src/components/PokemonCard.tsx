@@ -4,6 +4,7 @@ import { SimplePokemon } from '../interfaces/pokemonInterfaces'
 import { FadeInImage } from './FadeInImage';
 
 import ImageColors from 'react-native-image-colors'
+import { useNavigation } from '@react-navigation/core';
 
 const { width } = Dimensions.get('window');
 
@@ -15,6 +16,8 @@ export const PokemonCard = ({ pokemon }: Props) => {
     const [bgColor, setBgColor] = useState('grey');
     //Para ver si el componente esta mostado
     const isMounted = useRef(true);
+    //Para nevegar entre las pantallas
+    const navigation = useNavigation();
 
     useEffect(() => {
         ImageColors.getColors(pokemon.picture, {
@@ -22,7 +25,7 @@ export const PokemonCard = ({ pokemon }: Props) => {
         }).then(colors => {
             //Dic que si el componente esta desmontado retorne sin ejecutar el color
             if (!isMounted.current) {
-                
+
                 return
             }
             if (colors.platform === 'ios') {
@@ -32,14 +35,22 @@ export const PokemonCard = ({ pokemon }: Props) => {
             }
         });
         //Retorno se dispara cuando el compnente se va desmontar
-        return ()=>{
-            isMounted.current=false;
+        return () => {
+            isMounted.current = false;
         }
     }, [])
 
     return (
         <TouchableOpacity
             activeOpacity={0.7}
+            onPress={
+                () => {
+                    navigation.navigate('PokemonScreen', {
+                        simplePokemon: pokemon,
+                        color:bgColor
+                    })
+                }
+            }
         >
             <View
                 style={{
