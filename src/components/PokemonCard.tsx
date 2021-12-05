@@ -61,7 +61,8 @@ export const PokemonCard = ({ pokemon }: Props) => {
             >
                 {/* Nombre del pokemon */}
                 <Text style={{
-                    ...styles.name
+                    ...styles.name,
+                    textTransform:'capitalize'
                 }}>
                     {pokemon.name}
                     {'\n#' + pokemon.id}

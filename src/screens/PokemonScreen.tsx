@@ -47,6 +47,7 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                 {/* Nombre del Pokemón */}
                 <Text style={{
                     ...styles.pokemonName,
+                    textTransform:'capitalize',
                     top: top + 40
                 }}>{name + '\n'} #{id}</Text>
                 {/* Pokebola blanca */}
