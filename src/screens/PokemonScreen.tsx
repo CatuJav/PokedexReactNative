@@ -8,8 +8,7 @@ import { PokemonDetails } from '../components/PokemonDetails'
 
 import { usePokemon } from '../hooks/usePokemon'
 
-import { RootStackParams } from '../navigator/navigator'
-import { HomeScreen } from './HomeScreen'
+import { RootStackParams } from '../navigator/Tab1'
 
 //Para tener el tipado que va recibir
 interface Props extends StackScreenProps<RootStackParams, 'PokemonScreen'> { }
